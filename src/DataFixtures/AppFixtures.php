@@ -14,24 +14,24 @@ class AppFixtures extends Fixture
 
     private $userPasswordHasher;
 
-        public function __construct(UserPasswordHasherInterface $userPasswordHasher)
-        {
-            $this->userPasswordHasher = $userPasswordHasher;
-        }
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
 
     public function load(ObjectManager $manager): void
     {
 
         $user = new User();
         $user->setEmail("user@bookapi.com");
-        $user->setRoles(['ROLE_USER']);
+        $user->setRoles(["ROLE_USER"]);
 
         $user->setPassword($this->userPasswordHasher->hashPassword($user, 'password'));
         $manager->persist($user);
 
         $userAdmin = new User();
         $userAdmin->setEmail("admin@bookapi.com");
-        $userAdmin->setRoles(['ROLE_ADMIN']);
+        $userAdmin->setRoles(["ROLE_ADMIN"]);
 
         $userAdmin->setPassword($this->userPasswordHasher->hashPassword($userAdmin, 'password'));
         $manager->persist($userAdmin);
@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $author = new Author;
             $author->setFirstName('Prénom ' . $i);
-            $author->setLastName('Nom '. $i);
+            $author->setLastName('Nom ' . $i);
             $manager->persist($author);
             $listAuthor[] = $author;
         }
@@ -51,10 +51,11 @@ class AppFixtures extends Fixture
             $livre->setTitle('Livre ' . $i);
             $livre->setCoverText('Quatrième de couverture numéro :
             ' . $i);
+            $livre->setComment("Commentaire");
             $livre->setAuthor($listAuthor[array_rand($listAuthor)]);
             $manager->persist($livre);
         }
 
-            $manager->flush();
-        }
+        $manager->flush();
+    }
 }
