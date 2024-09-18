@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class VersioningService
 {
     private $requestStack;
+    private $defaultVersion;
 
     public function __construct(RequestStack $requestStack, ParameterBagInterface $params)
     {
