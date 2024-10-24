@@ -1,10 +1,10 @@
 controllers:
-  resource: ../src/Controller/
-  type: annotation
-
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
 kernel:
-  resource: ../src/Kernel.php
-  type: annotation
-
+    resource: ../src/kernel.php
+    type: annotation
 api_login_check:
-  path: /api/login_check
+    path: /api/login_check
